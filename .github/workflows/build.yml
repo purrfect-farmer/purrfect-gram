@@ -35,7 +35,7 @@ jobs:
       - name: Patch limit.ts
         working-directory: web-a
         run: |
-          sed -i 's/moreAccounts: \[3, MULTIACCOUNT_MAX_SLOTS\]/moreAccounts: [10_000, 100_000]/' src/limit.ts
+          sed -i 's/moreAccounts: \[3, MULTIACCOUNT_MAX_SLOTS\]/moreAccounts: [10_000, 100_000]/' src/limits.ts
 
       # Build the project
       - name: Build
