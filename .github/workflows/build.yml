@@ -41,12 +41,12 @@ jobs:
       # Install dependencies Web-K
       - name: Install dependencies Web-K
         working-directory: web-k
-        run: pnpm install
+        run: pnpm install --production
 
       # Install dependencies
       - name: Install dependencies Web-A
         working-directory: web-a
-        run: npm ci
+        run: npm install
 
       # Replace specific line before build
       - name: Patch constants.ts Web-K
