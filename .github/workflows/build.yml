@@ -82,7 +82,7 @@ jobs:
       - name: Copy Dist
         run: |
           mkdir dist
-          mv web-k/public dist/k
+          mv web-k/dist dist/k
           mv web-a/dist dist/a
 
       # Upload the built files to GitHub Pages
