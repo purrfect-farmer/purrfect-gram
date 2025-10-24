@@ -43,7 +43,6 @@ jobs:
         working-directory: web-k
         run: |
           pnpm install
-          pnpm install --production
 
       # Install dependencies
       - name: Install dependencies Web-A
