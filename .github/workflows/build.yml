@@ -1,0 +1,57 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
+      # Clone Web-A
+      - name: Clone Web-A
+        run: git clone https://github.com/Ajaxy/telegram-tt.git web-a
+
+      # Install dependencies
+      - name: Install dependencies
+        working-directory: web-a
+        run: npm ci
+
+      # Build the project
+      - name: Build
+        working-directory: web-a
+        run: npm run build:production
+        env:
+          BASE_URL: "https://gram.purrfectfarmer.com/a/"
+          TELEGRAM_API_ID: 2496
+          TELEGRAM_API_HASH: "8da85b0d5bfe62527e5b244c209159c3"
+
+        # Move dist folder
+      - name: Copy Dist
+        run: |
+          mkdir dist
+          mv web-a/dist dist/a
+
+      # Upload the built files to GitHub Pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
