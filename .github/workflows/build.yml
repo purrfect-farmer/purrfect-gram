@@ -22,23 +22,52 @@ jobs:
         with:
           node-version: "lts/*"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      # Clone Web-K
+      - name: Clone Web-K
+        run: git clone --depth 1 --recurse-submodules --shallow-submodules https://github.com/morethanwords/tweb.git web-k
+
       # Clone Web-A
       - name: Clone Web-A
         run: git clone --depth 1 --recurse-submodules --shallow-submodules https://github.com/Ajaxy/telegram-tt.git web-a
 
+      # Install dependencies Web-K
+      - name: Install dependencies Web-K
+        working-directory: web-k
+        run: pnpm install
+
       # Install dependencies
-      - name: Install dependencies
+      - name: Install dependencies Web-A
         working-directory: web-a
         run: npm ci
 
       # Replace specific line before build
-      - name: Patch limit.ts
+      - name: Patch constants.ts Web-K
+        working-directory: web-k
+        run: |
+          sed -i 's/export const MAX_ACCOUNTS_FREE = 3;/export const MAX_ACCOUNTS_FREE = 10_000;/' src/lib/accounts/constants.ts
+          sed -i 's/export const MAX_ACCOUNTS_PREMIUM = 4;/export const MAX_ACCOUNTS_PREMIUM = 100_000;/' src/lib/accounts/constants.ts
+
+      - name: Patch limit.ts Web-A
         working-directory: web-a
         run: |
           sed -i 's/moreAccounts: \[3, MULTIACCOUNT_MAX_SLOTS\]/moreAccounts: [10_000, 100_000]/' src/limits.ts
 
-      # Build the project
-      - name: Build
+      # Build Web-K
+      - name: Build Web-K
+        working-directory: web-k
+        run: pnpm run build --base="https://gram.purrfectfarmer.com/k/"
+        env:
+          VITE_API_ID: 2496
+          VITE_API_HASH: "8da85b0d5bfe62527e5b244c209159c3"
+          VITE_PUSH_SERVER_KEY: "BHEbKOXt-GD8MCTTYiAYT3I5R4MB0epIE7Tbbymj1uR0xJRE_7m27eXTVAC_P19TeZnO9413lRz-0oZ87JRPKPM"
+
+      # Build Web-A
+      - name: Build Web-A
         working-directory: web-a
         run: npm run build:production
         env:
@@ -50,6 +79,7 @@ jobs:
       - name: Copy Dist
         run: |
           mkdir dist
+          mv web-k/public dist/k
           mv web-a/dist dist/a
 
       # Upload the built files to GitHub Pages
