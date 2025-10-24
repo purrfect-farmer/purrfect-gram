@@ -63,7 +63,7 @@ jobs:
       # Build Web-K
       - name: Build Web-K
         working-directory: web-k
-        run: node build --base="https://gram.purrfectfarmer.com/k/"
+        run: node build
         env:
           VITE_API_ID: 2496
           VITE_API_HASH: "8da85b0d5bfe62527e5b244c209159c3"
