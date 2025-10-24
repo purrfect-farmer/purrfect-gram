@@ -24,7 +24,7 @@ jobs:
 
       # Clone Web-A
       - name: Clone Web-A
-        run: git clone https://github.com/Ajaxy/telegram-tt.git web-a
+        run: git clone https://github.com/Ajaxy/telegram-tt.git web-a --depth 1
 
       # Install dependencies
       - name: Install dependencies
