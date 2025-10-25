@@ -39,4 +39,57 @@ safeReplace("web-k/src/lib/accounts/constants.ts", [
   ],
 ]);
 
+safeReplace("web-k/src/lib/accounts/types.d.ts", [
+  [
+    "export type ActiveAccountNumber = 1 | 2 | 3 | 4;",
+    `export type ActiveAccountNumber = ${Array.from(
+      { length: 500 },
+      (_, i) => i + 1
+    ).join(" | ")};`,
+  ],
+]);
+
+safeReplace("web-k/src/lib/accounts/accountController.ts", [
+  [
+    "([1, 2, 3, 4] as const)",
+    `([${Array.from({ length: 500 }, (_, i) => i + 1).join(", ")}] as const)`,
+  ],
+]);
+
+safeReplace("web-k/src/lib/mtproto/apiManager.ts", [
+  [
+    "([1, 2, 3, 4] as ActiveAccountNumber[])",
+    `([${Array.from({ length: 500 }, (_, i) => i + 1).join(
+      ", "
+    )}] as ActiveAccountNumber[])`,
+  ],
+]);
+
+safeReplace("web-k/src/lib/appManagers/utils/state/loadState.ts", [
+  [
+    "[1, 2, 3, 4]",
+    `[${Array.from({ length: 500 }, (_, i) => i + 1).join(", ")}]`,
+  ],
+]);
+
+safeReplace("web-k/src/lib/accounts/getValidatedAccount.ts", [
+  ["input <= 4", "input <= 500"],
+]);
+
+safeReplace("web-k/src/lib/sessionStorage.ts", [
+  [
+    "'account4',",
+    `${Array.from({ length: 500 - 3 }, (_, i) => `'account${i + 4}',`).join(
+      "\n    "
+    )}`,
+  ],
+  [
+    "account4: AccountSessionData,",
+    `${Array.from(
+      { length: 500 - 3 },
+      (_, i) => `account${i + 4}: AccountSessionData,`
+    ).join("\n  ")}`,
+  ],
+]);
+
 console.log("✅ All patches applied successfully.");
