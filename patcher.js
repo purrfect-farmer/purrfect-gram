@@ -75,14 +75,14 @@ safeReplace("web-k/src/lib/appManagers/utils/state/loadState.ts", [
     `${Array.from(
       { length: 500 - 3 },
       (_, i) => `loadStateForAccount(${i + 4})`
-    ).join(",")}`,
+    ).join(", ")}`,
   ],
   [
     "4: rest[2]",
     `${Array.from(
       { length: 500 - 3 },
       (_, i) => `${i + 4}: rest[${i + 2}]`
-    ).join(",")}`,
+    ).join(", ")}`,
   ],
 ]);
 
@@ -94,7 +94,7 @@ safeReplace("web-k/src/lib/sessionStorage.ts", [
   [
     "'account4',",
     `${Array.from({ length: 500 - 3 }, (_, i) => `'account${i + 4}',`).join(
-      ""
+      " "
     )}`,
   ],
   [
@@ -102,7 +102,7 @@ safeReplace("web-k/src/lib/sessionStorage.ts", [
     `${Array.from(
       { length: 500 - 3 },
       (_, i) => `account${i + 4}: AccountSessionData,`
-    ).join("")}`,
+    ).join(" ")}`,
   ],
 ]);
 
@@ -112,7 +112,7 @@ safeReplace("web-k/src/lib/appManagers/appManagersManager.ts", [
     `${Array.from(
       { length: 500 - 3 },
       (_, i) => `${i + 4}: new AppStateManager(${i + 4})`
-    ).join(",")}`,
+    ).join(", ")}`,
   ],
 ]);
 
