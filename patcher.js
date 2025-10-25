@@ -39,6 +39,13 @@ safeReplace("web-k/src/lib/accounts/constants.ts", [
   ],
 ]);
 
+safeReplace("web-k/src/lib/accounts/types.ts", [
+  [
+    "export type ActiveAccountNumber = 1 | 2 | 3 | 4;",
+    "export type ActiveAccountNumber = number;",
+  ],
+]);
+
 safeReplace("web-k/src/lib/accounts/accountController.ts", [
   [
     "([1, 2, 3, 4] as const)",
