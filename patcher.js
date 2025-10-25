@@ -67,6 +67,10 @@ safeReplace("web-k/src/lib/accounts/getValidatedAccount.ts", [
 
 safeReplace("web-k/src/lib/sessionStorage.ts", [
   [
+    "new LocalStorageController<StorageValues & DeprecatedStorageValues>",
+    "new LocalStorageController<any>",
+  ],
+  [
     "'account4',",
     "'account4', ...Array.from({length: 10_000}).map((_, i) => `account${i + 5}`),",
   ],
