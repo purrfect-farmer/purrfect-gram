@@ -39,41 +39,4 @@ safeReplace("web-k/src/lib/accounts/constants.ts", [
   ],
 ]);
 
-safeReplace("web-k/src/lib/accounts/types.d.ts", [
-  [
-    "export type ActiveAccountNumber = 1 | 2 | 3 | 4;",
-    "export type ActiveAccountNumber = number;",
-  ],
-]);
-
-safeReplace("web-k/src/lib/accounts/accountController.ts", [
-  ["([1, 2, 3, 4] as const)", "Array.from({length: 10_000}, (_, i) => i + 1)"],
-]);
-
-safeReplace("web-k/src/lib/mtproto/apiManager.ts", [
-  [
-    "([1, 2, 3, 4] as ActiveAccountNumber[])",
-    "Array.from({length: 10_000}, (_, i) => i + 1)",
-  ],
-]);
-
-safeReplace("web-k/src/lib/appManagers/utils/state/loadState.ts", [
-  ["[1, 2, 3, 4]", "Array.from({length: 10_000}, (_, i) => i + 1)"],
-]);
-
-safeReplace("web-k/src/lib/accounts/getValidatedAccount.ts", [
-  ["input <= 4", "input <= 100_000"],
-]);
-
-safeReplace("web-k/src/lib/sessionStorage.ts", [
-  [
-    "new LocalStorageController<StorageValues & DeprecatedStorageValues>",
-    "new LocalStorageController<any>",
-  ],
-  [
-    "'account4',",
-    "'account4', ...Array.from({length: 10_000}).map((_, i) => `account${i + 5}`),",
-  ],
-]);
-
 console.log("✅ All patches applied successfully.");
