@@ -18,6 +18,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       # Set up Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -49,17 +53,9 @@ jobs:
         working-directory: web-a
         run: npm install
 
-      # Replace specific line before build
-      - name: Patch constants.ts Web-K
-        working-directory: web-k
-        run: |
-          sed -i 's/export const MAX_ACCOUNTS_FREE = 3;/export const MAX_ACCOUNTS_FREE = 10_000;/' src/lib/accounts/constants.ts
-          sed -i 's/export const MAX_ACCOUNTS_PREMIUM = 4;/export const MAX_ACCOUNTS_PREMIUM = 100_000;/' src/lib/accounts/constants.ts
-
-      - name: Patch limit.ts Web-A
-        working-directory: web-a
-        run: |
-          sed -i 's/moreAccounts: \[3, MULTIACCOUNT_MAX_SLOTS\]/moreAccounts: [10_000, 100_000]/' src/limits.ts
+      # Apply custom patches
+      - name: Apply code patches
+        run: node patcher.js
 
       # Build Web-K
       - name: Build Web-K
