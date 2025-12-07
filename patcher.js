@@ -27,6 +27,10 @@ safeReplace("web-a/src/limits.ts", [
   ],
 ]);
 
+safeReplace("web-a/src/components/left/main/LeftSideMenuItems.tsx", [
+  ["IS_MULTIACCOUNT_SUPPORTED && currentUser", "currentUser"],
+]);
+
 /** Web-K */
 safeReplace("web-k/src/lib/accounts/constants.ts", [
   [
