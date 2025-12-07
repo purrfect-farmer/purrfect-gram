@@ -60,14 +60,20 @@ safeReplace("web-k/src/lib/accounts/accountController.ts", [
   ],
 ]);
 
-safeReplace("web-k/src/lib/mtproto/apiManager.ts", [
-  [
-    "([1, 2, 3, 4] as ActiveAccountNumber[])",
-    `([${Array.from({ length: 500 }, (_, i) => i + 1).join(
-      ", "
-    )}] as ActiveAccountNumber[])`,
-  ],
-]);
+[
+  "web-k/src/lib/mtproto/apiManager.ts",
+  "web-k/src/lib/appManagers/appManagersManager.ts",
+  "web-k/src/lib/appManagers/appStoragesManager.ts",
+].forEach((path) => {
+  safeReplace(path, [
+    [
+      "2, 3, 4] as ActiveAccountNumber[])",
+      `${Array.from({ length: 500 - 1 }, (_, i) => i + 2).join(
+        ", "
+      )}] as ActiveAccountNumber[])`,
+    ],
+  ]);
+});
 
 safeReplace("web-k/src/lib/appManagers/utils/state/loadState.ts", [
   [
@@ -119,5 +125,7 @@ safeReplace("web-k/src/lib/appManagers/appManagersManager.ts", [
     ).join(", ")}`,
   ],
 ]);
+
+safeReplace("web-k/src/lib/mtproto/mtprotoworker.ts", [["i <= 4", "i <= 500"]]);
 
 console.log("✅ All patches applied successfully.");
