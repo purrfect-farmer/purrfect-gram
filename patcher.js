@@ -27,6 +27,10 @@ safeReplace("web-a/src/limits.ts", [
   ],
 ]);
 
+safeReplace("web-a/src/api/gramjs/methods/bots.ts", [
+  ["platform: WEB_APP_PLATFORM,", "platform: 'android',"],
+]);
+
 safeReplace("web-a/src/util/browser/globalEnvironment.ts", [
   ["'SharedWorker' in globalThis", "true"],
 ]);
