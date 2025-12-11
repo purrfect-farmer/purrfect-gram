@@ -47,6 +47,10 @@ safeReplace("web-k/src/lib/accounts/constants.ts", [
   ],
 ]);
 
+safeReplace("web-k/src/lib/appManagers/appAttachMenuBotsManager.ts", [
+  ["const platform = 'web';", "const platform = 'android';"],
+]);
+
 safeReplace("web-k/src/lib/accounts/types.d.ts", [
   [
     "export type ActiveAccountNumber = 1 | 2 | 3 | 4;",
