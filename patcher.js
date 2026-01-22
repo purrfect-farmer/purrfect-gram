@@ -68,7 +68,7 @@ safeReplace("web-k/src/lib/accounts/accountController.ts", [
   ],
 ]);
 
-safeReplace("src/lib/apiManagerProxy.ts", [
+safeReplace("web-k/src/lib/apiManagerProxy.ts", [
   [
     "i <= 4;",
     "i <= 500;",
@@ -76,7 +76,6 @@ safeReplace("src/lib/apiManagerProxy.ts", [
 ]);
 
 [
-  "web-k/src/lib/mtproto/apiManager.ts",
   "web-k/src/lib/appManagers/apiManager.ts",
   "web-k/src/lib/appManagers/appManagersManager.ts",
   "web-k/src/lib/appManagers/appStoragesManager.ts",
@@ -142,6 +141,5 @@ safeReplace("web-k/src/lib/appManagers/appManagersManager.ts", [
   ],
 ]);
 
-safeReplace("web-k/src/lib/mtproto/mtprotoworker.ts", [["i <= 4", "i <= 500"]]);
 
 console.log("✅ All patches applied successfully.");
