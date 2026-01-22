@@ -68,8 +68,16 @@ safeReplace("web-k/src/lib/accounts/accountController.ts", [
   ],
 ]);
 
+safeReplace("src/lib/apiManagerProxy.ts", [
+  [
+    "i <= 4;",
+    "i <= 500;",
+  ]
+]);
+
 [
   "web-k/src/lib/mtproto/apiManager.ts",
+  "web-k/src/lib/appManagers/apiManager.ts",
   "web-k/src/lib/appManagers/appManagersManager.ts",
   "web-k/src/lib/appManagers/appStoragesManager.ts",
 ].forEach((path) => {
