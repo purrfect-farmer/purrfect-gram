@@ -36,7 +36,9 @@ jobs:
 
       # Clone Web-K
       - name: Clone Web-K
-        run: git clone --depth 1 --recurse-submodules --shallow-submodules https://github.com/morethanwords/tweb.git web-k
+        run: |
+          git clone --depth 1 https://github.com/morethanwords/tweb.git web-k
+          git -C web-k submodule update --init --depth 1
 
       # Clone Web-A
       - name: Clone Web-A
